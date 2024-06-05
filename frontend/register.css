@@ -1,0 +1,263 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+
+:root {
+    --primary-color: #3498DB;
+    --primary-color-dark: #2980B9;
+    --secondary-color: #2ECC71;
+    --text-dark: #202428;
+    --text-light: #233e42;
+    --extra-light: #ECF0F1;
+    --max-width: 1200px;
+}
+  
+  *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+    body{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      min-height: 100vh;
+      background: url(../images/register.jpg) no-repeat;
+      background-size: cover;
+      background-position: center;
+    }
+  
+    nav {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: var(--text-dark);
+      color: var(--extra-light);
+      z-index: 99;
+    }
+    
+    .nav__content {
+      max-width: var(--max-width);
+      margin: auto;
+      padding: 1.5rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    nav .logo a {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      transition: 0.3s;
+      text-decoration: none;
+    }
+    
+    nav .logo a:hover {
+      color: var(--primary-color-dark);
+    }
+    
+    nav .checkbox {
+      display: none;
+    }
+    
+    nav input {
+      display: none;
+    }
+    nav .checkbox i {
+      font-size: 2rem;
+      color: var(--primary-color);
+      cursor: pointer;
+    }
+    ul {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      list-style: none;
+      transition: left 0.3s;
+    }
+    
+    ul li a {
+      padding: 0.5rem 1rem;
+      border: 2px solid transparent;
+      text-decoration: none;
+      font-weight: 600;
+      color: var(--extra-light);
+      transition: 0.3s;
+    }
+    
+    ul li a:hover {
+      border-top-color: var(--secondary-color);
+      border-bottom-color: var(--secondary-color);
+      color: var(--secondary-color);
+    }
+  
+    .input-box input{
+      width: 100%;
+      height: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      border: 2px solid rgba(255,255,255, .2);
+      border-radius: 40px;
+      font-size: 16px;
+      color: #2d509a;
+      padding: 20px 45px 20px 20px;
+    }
+    
+    .input-box input::placeholder{
+      color: #fff;
+    }
+    
+    .input-box i{
+      position: absolute;
+      right: 20px;
+      top: 30%;
+      transform: translate(-50%);
+      font-size: 20px;
+    }
+    
+    .remember-forgot a{
+      accent-color: #fff;
+      text-decoration: none;
+    }
+    
+    .input-box input[type="email"]::placeholder,
+    .input-box input[type="text"]::placeholder,
+    .input-box input[type="number"]::placeholder,
+    .input-box input[type="text"]::placeholder,
+    .input-box input[type="password"]::placeholder{
+      color:rgb(205 67 17);
+    }
+    
+    .input-box i.bxs-envelope,
+    .input-box i.bxs-lock-alt {
+      position: absolute;
+      right: 20px;
+      top: 30%;
+      transform: translate(-50%);
+      font-size: 20px;
+    }
+    
+    .register-form{
+      width: 420px;
+      background: transparent;
+      border: 2px solid rgba(255,255,255, .2);
+      /* border-radius: 213px; */
+      padding: 40px;
+      backdrop-filter: blur(9px);
+      margin-left: 33%;
+      margin-top: -3%;
+    }
+    
+    .register-form h1{
+      font-size: 36px;
+      text-align: center;
+      font-weight: bold;
+      
+    }
+    
+    .register-form .input-box{
+      position: relative;
+      width: 100%;
+      height: 50px;
+      margin: 30px 0;
+    }
+    
+    .register-form .remember-forgot{
+      display: flex;
+      justify-content: space-between;
+      font-size: 14.5px;
+      margin: -15px 0 15px;
+    }
+    
+    .register-form label input{
+      accent-color: #fff;
+      margin-right: 3px;
+    }
+    
+    .remember-forgot a{
+      color: #fff;
+      text-decoration: none;
+    }
+    
+    .remember-forgot a:hover{
+      text-decoration: underline;
+    }
+    
+    .register-form .btn{
+      width: 100%;
+      height: 45px;
+      background: #fff;
+      border: none;
+      outline: none;
+      border-radius: 50px;
+      box-shadow: 0 0 10px rgba(0,0,0,.1);
+      cursor: pointer;
+      font-size: 16px;
+      color: #333;
+      font-weight: 600;
+    }
+    
+    .register-form .register-link{
+      font-size: 14.5px;
+      text-align: center;
+      margin: 20px 0 15px;
+    }
+    
+    .register-link p a{
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .register-link p a:hover{
+      text-decoration: underline;
+    }
+    
+    .register-form .register-link p a{
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    .register-form .register-link p a:hover{
+      text-decoration: underline;
+    }
+  
+    .popup {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+    
+    .popup-content {
+      background-color: #fefefe;
+      margin: 10% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+    }
+    
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    
+    
