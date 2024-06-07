@@ -11,7 +11,7 @@ if (!isset($_SESSION["admin_logged_in"]) || $_SESSION["admin_logged_in"] !== tru
 if (isset($_GET['logout'])) {
     session_unset();
     session_destroy();
-    header("Location: ./admin.html");
+    header("Location: ./index.html");
     exit();
 }
 
@@ -27,6 +27,22 @@ function parseBlockData($blockData) {
 
 // Initialize variables to store election results
 $candidates = []; // Initialize as empty array
+
+// Fetch all candidates from the database
+$stmtCandidates = $mysqli->query("SELECT id, name, description, photo FROM candidates");
+
+while ($candidate = $stmtCandidates->fetch_assoc()) {
+    $candidateId = $candidate['id'];
+    $candidates[$candidateId] = [
+        'name' => $candidate['name'],
+        'party' => $candidate['description'],
+        'votes' => 0,
+        'id' => $candidateId,
+        'photo' => $candidate['photo']
+    ];
+}
+
+$stmtCandidates->close();
 
 // Fetch blocks from the database and process them
 $blocks = [];
@@ -49,33 +65,10 @@ while ($currentHash !== null) {
         if (isset($parsedData['candidate_id'])) {
             $candidateId = $parsedData['candidate_id'];
 
-            // Fetch candidate information from the database
-            $stmtCandidate = $mysqli->prepare("SELECT id, name, description, photo FROM candidates WHERE id = ?");
-            $stmtCandidate->bind_param("i", $candidateId);
-            $stmtCandidate->execute();
-            $resultCandidate = $stmtCandidate->get_result();
-
-            if ($resultCandidate->num_rows > 0) {
-                $candidate = $resultCandidate->fetch_assoc();
-                $candidateName = $candidate['name'];
-                $candidateParty = $candidate['description'];
-                $candidateId = $candidate['id'];
-                $candidatePhoto = $candidate['photo'];
-
-                // Store candidate information and votes
-                if (!isset($candidates[$candidateId])) {
-                    $candidates[$candidateId] = [
-                        'name' => $candidateName,
-                        'party' => $candidateParty,
-                        'votes' => 0,
-                        'id' => $candidateId,
-                        'photo' => $candidatePhoto
-                    ];
-                }
+            // Increment vote count only if the candidate exists in $candidates array
+            if (isset($candidates[$candidateId])) {
                 $candidates[$candidateId]['votes']++;
             }
-
-            $stmtCandidate->close();
         }
 
         // Move to the previous block using previous_hash
@@ -98,9 +91,8 @@ $mysqli->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Election Results</title>
-    <!-- <link rel="stylesheet" href="../frontend/styles/">  -->
     <style>
-        body{
+        body {
             background-image: url(../frontend/styles/images/results.jpg);
         }
 
@@ -154,15 +146,6 @@ $mysqli->close();
             border-radius: 50%; /* Makes the image circular */
         }
 
-        .candidate-card h3 {
-            margin-top: 10px;
-            margin-bottom: 5px;
-        }
-
-        .candidate-card p {
-            margin: 5px 0;
-        }
-
         /* Added styles for navigation bar */
         nav {
             background-color: #ccc;
@@ -211,7 +194,7 @@ $mysqli->close();
     <nav>
         <ul>
             <li><a href="#">Election Results</a></li>
-            <li><a href="./admin.html">Admin Panel</a></li>
+            <li><a href="./dashboard.html">Admin Panel</a></li>
             <li><a href="?logout=true" class="logout-button">Logout</a></li>
         </ul>
     </nav>
@@ -237,6 +220,7 @@ $mysqli->close();
                     echo '</div>';
                 }
             } else {
+                // Handle case where no candidates are found
                 echo "<p>No candidates found.</p>";
             }
             ?>

@@ -3,37 +3,37 @@
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Check if the username is provided
     if (empty($_POST["username"])) {
-        die("Name is required");
+        echo "<script>alert('Name is required')</script>";
     }
     
     // Validate email
     if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
-        die("Valid email is required");
+        echo "<script>alert('Valid email is required')</script>";
     }
     
     // Check password length
     if (strlen($_POST["password"]) < 4) {
-        die("Password must be at least 4 characters");
+        echo "<script>alert('Password must be at least 4 characters')</script>";
     }
     
     // Ensure password contains at least one letter
     if (!preg_match("/[a-z]/i", $_POST["password"])) {
-        die("Password must contain at least one letter");
+        echo "<script>alert('Password must contain at least one letter')</script>";
     }
     
     // Ensure password contains at least one number
     if (!preg_match("/[0-9]/", $_POST["password"])) {
-        die("Password must contain at least one number");
+        echo "<script>alert('Password must contain at least one number')</script>";
     }
     
     // Check if passwords match
     if ($_POST["password"] !== $_POST["re_password"]) {
-        die("Passwords must match");
+        echo "<script>alert('Passwords must match')</script>";
     }
     
     // Check if mobile number is provided
     if (empty($_POST["mobile"])) {
-        die("Number is required");
+        echo "<script>alert('Number is required.')</script>";
     }
 
     // Sanitize inputs
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt = $mysqli->stmt_init();
 
     if (!$stmt->prepare($sql)) {
-        die("SQL error: " . $mysqli->error);
+        echo "<script>alert('Error Registering. Contact Administrator.')</script>";
     }
 
     $stmt->bind_param("ssss", $username, $email, $hashed_password, $mobile);
