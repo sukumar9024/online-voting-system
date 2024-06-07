@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Add Candidate</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: darkgrey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        nav {
+            width: 100%;
+            background-color: #333;
+            padding: 10px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+            padding: 10px 15px;
+            background-color: #555;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #777;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 400px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .form-group input[type="text"], .form-group input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-sizing: border-box;
+        }
+        .form-group button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+        .form-group button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="display_results.php">Results</a>
+    </nav>
+    <div class="form-container">
+        <h2>Add Candidate</h2>
+        <form method="post" action="add_candidate.php" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="candidate_name">Candidate Name:</label>
+                <input type="text" id="candidate_name" name="candidate_name" required>
+            </div>
+            <div class="form-group">
+                <label for="candidate_party">Candidate Party:</label>
+                <input type="text" id="candidate_party" name="candidate_party" required>
+            </div>
+            <div class="form-group">
+                <label for="candidate_photo">Candidate Photo:</label>
+                <input type="file" id="candidate_photo" name="candidate_photo" accept="image/*" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">Add Candidate</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

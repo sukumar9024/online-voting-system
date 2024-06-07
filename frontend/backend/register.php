@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $stmt->bind_param("ssss", $username, $email, $hashed_password, $mobile);
     
     if ($stmt->execute()) {
-        header("Location: ../index.html");
+        header("Location: ../../index.html");
         exit;
     } else {
         if ($mysqli->errno === 1062) {

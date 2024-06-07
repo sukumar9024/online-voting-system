@@ -2,11 +2,11 @@
 
 $host = "localhost";
 $dbname = "e-voting-system";
-$usernameDB = "root";
+$username = "root";
 $password = "";
 
 $mysqli = new mysqli(hostname: $host,
-                     username: $usernameDB,
+                     username: $username,
                      password: $password,
                      database: $dbname);
                      
